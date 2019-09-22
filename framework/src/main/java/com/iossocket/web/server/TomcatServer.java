@@ -6,7 +6,7 @@ import org.apache.catalina.core.StandardContext;
 import org.apache.catalina.startup.Tomcat;
 
 public class TomcatServer {
-    private static final String TEST_SERVLET_NAME = "testServlet";
+    private static final String DISPATCHER_SERVLET_NAME = "DispatcherServlet";
     private Tomcat tomcat;
     private String[] args;
 
@@ -26,9 +26,9 @@ public class TomcatServer {
 
         tomcat.getHost().addChild(context);
 
-        Tomcat.addServlet(context, TEST_SERVLET_NAME, "com.iossocket.web.servlet.TestServlet")
+        Tomcat.addServlet(context, DISPATCHER_SERVLET_NAME, "com.iossocket.web.servlet.DispatcherServlet")
                 .setAsyncSupported(true);
-        context.addServletMappingDecoded("/test.json", TEST_SERVLET_NAME);
+        context.addServletMappingDecoded("/", DISPATCHER_SERVLET_NAME);
 
         Thread awaitThread = new Thread("tomcat_await_thread") {
             @Override
