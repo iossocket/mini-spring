@@ -1,8 +1,8 @@
 package com.iossocket.starter;
 
 import com.iossocket.core.ClassScanner;
+import com.iossocket.handler.HandlerManager;
 import com.iossocket.web.server.TomcatServer;
-import org.apache.catalina.LifecycleException;
 
 import java.util.List;
 
@@ -13,6 +13,7 @@ public class MiniApplication {
         try {
             tomcatServer.startServer();
             List<Class<?>> classList = ClassScanner.scanClasses(cls.getPackage().getName());
+            HandlerManager.resolveMappingHandler(classList);
             classList.forEach(it -> System.out.println(it.getName()));
         } catch (Exception e) {
             e.printStackTrace();
