@@ -1,5 +1,6 @@
 package com.iossocket.starter;
 
+import com.iossocket.beans.BeanFactory;
 import com.iossocket.core.ClassScanner;
 import com.iossocket.handler.HandlerManager;
 import com.iossocket.web.server.TomcatServer;
@@ -13,6 +14,7 @@ public class MiniApplication {
         try {
             tomcatServer.startServer();
             List<Class<?>> classList = ClassScanner.scanClasses(cls.getPackage().getName());
+            BeanFactory.initBeans(classList);
             HandlerManager.resolveMappingHandler(classList);
             classList.forEach(it -> System.out.println(it.getName()));
         } catch (Exception e) {

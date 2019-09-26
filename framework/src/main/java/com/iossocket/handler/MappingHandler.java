@@ -1,5 +1,7 @@
 package com.iossocket.handler;
 
+import com.iossocket.beans.BeanFactory;
+
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +32,7 @@ public class MappingHandler {
             parameters[i] = req.getParameter(args[i]);
         }
 
-        Object ctr = controller.newInstance();
+        Object ctr = BeanFactory.getBean(controller);
         Object response = method.invoke(ctr, parameters);
         res.getWriter().println(response.toString());
         return true;
